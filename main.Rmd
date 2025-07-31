@@ -1,5 +1,92 @@
 ---
-title: "main"
+title: "Rainfall Forecast Accuracy by Lead Day and Forecast Hour"
 output: html_document
 ---
 
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lubridate)
+library(janitor)
+```
+
+### Load and Clean Data
+
+```{r}
+# Load CSVs
+hist_forecast_dt <- read_csv("historical_forecast.csv")
+hist_dt <- read_csv("historical.csv")
+
+# Clean column names
+hist_forecast_dt <- clean_names(hist_forecast_dt)
+hist_dt <- clean_names(hist_dt)
+
+# Parse datetime columns and compute lead time in forecast data
+hist_forecast_dt <- hist_forecast_dt %>%
+  mutate(
+    forecast_time = as.POSIXct(forecast_dt_iso, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"),
+    target_time = as.POSIXct(slice_dt_iso, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"),
+    lead_time_hr = as.numeric(difftime(target_time, forecast_time, units = "hours")),
+    forecast_hour = hour(forecast_time)
+  ) %>%
+  filter(lead_time_hr >= 0)
+```
+
+### Deduplicate and Filter Observations
+
+```{r}
+# Deduplicate historical records by dt_iso
+hist_dt <- hist_dt %>%
+  filter(dt >= 1507334400) %>%
+  distinct(dt_iso, .keep_all = TRUE) %>%
+  mutate(obs_time = as.POSIXct(dt_iso, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"))
+```
+
+### Forecast Evaluation Function
+
+```{r}
+# Evaluate forecasts made at a specific hour (00, 06, 12, 18 UTC)
+process_by_day <- function(hour) {
+  hist_forecast_dt %>%
+    filter(forecast_hour == hour) %>%
+    mutate(
+      lead_day = floor(lead_time_hr / 24)
+    ) %>%
+    filter(lead_day >= 1, lead_day <= 16) %>%
+    inner_join(hist_dt, by = c("target_time" = "obs_time")) %>%
+    mutate(
+      rain_error = rain_1h - rain,
+      abs_error = abs(rain_error),
+      squared_error = (rain_1h - rain)^2,
+      forecast_hour_label = paste0(sprintf("%02d", hour), ":00 UTC")
+    ) %>%
+    filter(!is.na(rain_1h) & !is.na(rain)) %>%
+    group_by(forecast_hour_label, lead_day) %>%
+    summarise(
+      mae = mean(abs_error, na.rm = TRUE),
+      rmse = sqrt(mean(squared_error, na.rm = TRUE)),
+      count = n(),
+      .groups = "drop"
+    )
+}
+```
+
+### Aggregate MAE by Forecast Origin Hour
+
+```{r}
+accuracy_by_day <- map_dfr(c(0, 6, 12, 18), process_by_day)
+```
+
+### Plot: MAE by Lead Day, Faceted by Forecast Time
+
+```{r}
+ggplot(accuracy_by_day, aes(x = lead_day, y = mae)) +
+  geom_line(color = "steelblue", linewidth = 1) +
+  facet_wrap(~forecast_hour_label, ncol = 2) +
+  scale_x_continuous(breaks = 1:16) +
+  labs(
+    title = "Rainfall Forecast MAE by Lead Day (Grouped by Forecast Origin Time)",
+    x = "Days Ahead",
+    y = "Mean Absolute Error (mm)"
+  ) +
+  theme_minimal()
+```

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://openweathermap.org/api/history-forecast-bulk -->
+<html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark" data-darkreader-proxy-injected="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
+html {
+    background-color: var(--darkreader-background-ffffff, #181a1b) !important;
+}
+html {
+    color-scheme: dark !important;
+}
+iframe {
+    color-scheme: dark !important;
+}
+html, body {
+    background-color: var(--darkreader-background-ffffff, #181a1b);
+}
+html, body {
+    border-color: var(--darkreader-border-4c4c4c, #736b5e);
+    color: var(--darkreader-text-000000, #e8e6e3);
+}
+a {
+    color: var(--darkreader-text-0040ff, #3391ff);
+}
+table {
+    border-color: var(--darkreader-border-808080, #545b5e);
+}
+mark {
+    color: var(--darkreader-text-000000, #e8e6e3);
+}
+::placeholder {
+    color: var(--darkreader-text-a9a9a9, #b2aba1);
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: var(--darkreader-background-faffbd, #404400) !important;
+    color: var(--darkreader-text-000000, #e8e6e3) !important;
+}
+* {
+    scrollbar-color: var(--darkreader-background-b0b0b0, #454a4d) var(--darkreader-background-f1f1f1, #202324);
+}
+::selection {
+    background-color: var(--darkreader-background-0060d4, #004daa) !important;
+    color: var(--darkreader-text-ffffff, #e8e6e3) !important;
+}
+::-moz-selection {
+    background-color: var(--darkreader-background-0060d4, #004daa) !important;
+    color: var(--darkreader-text-ffffff, #e8e6e3) !important;
+}
+}</style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula, a[data-testid="headerMediumLogo"]>svg, .d2l-navigation-link-image-container, .d2l-iframe-loading-container, #chart-component, #y-axis, img.leaflet-tile {
+    filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}
+[data-darkreader-inline-bg] {
+  background: var(--darkreader-inline-bg) !important;
+}
+[data-darkreader-inline-border-short] {
+  border: var(--darkreader-inline-border-short) !important;
+}
+[data-darkreader-inline-border-bottom-short] {
+  border-bottom: var(--darkreader-inline-border-bottom-short) !important;
+}
+[data-darkreader-inline-border-left-short] {
+  border-left: var(--darkreader-inline-border-left-short) !important;
+}
+[data-darkreader-inline-border-right-short] {
+  border-right: var(--darkreader-inline-border-right-short) !important;
+}
+[data-darkreader-inline-border-top-short] {
+  border-top: var(--darkreader-inline-border-top-short) !important;
+}
+[data-darkreader-inline-invert] {
+    filter: invert(100%) hue-rotate(180deg);
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: var(--darkreader-background-ffffff, #181a1b);
+   --darkreader-neutral-text: var(--darkreader-text-000000, #e8e6e3);
+   --darkreader-selection-background: var(--darkreader-background-0060d4, #004daa);
+   --darkreader-selection-text: var(--darkreader-text-ffffff, #e8e6e3);
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style>
+  <title> History Forecast Bulk - OpenWeatherMap</title>
+  <meta name="apple-itunes-app" content="app-id=1535923697">
+  <!-- Google tag (gtag.js) -->
+<script async="" src="./History Forecast Bulk - OpenWeatherMap_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-31TSX35RJT');
+</script>
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="weather, world, Openstreetmap, forecast, Openweather, current">
+<meta name="description" content="Download quickly and easily historical 16-day weather forecasts from October 2017 for any global location
+with OpenWeather&#39;s History Forecast Bulk using our Marketplace. Available in CSV and JSON formats.">
+<meta name="author" content="OpenWeatherMap.org">
+<meta name="domain" content="OpenWeatherMap.org">
+<meta name="p:domain_verify" content="34fe229eab8562dca90f4a5962ff80a9">
+<meta property="title" content="History Forecast Bulk">  <link rel="stylesheet" href="./History Forecast Bulk - OpenWeatherMap_files/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"><style class="darkreader darkreader--sync" media="screen"></style>  <link rel="shortcut icon" href="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/favicon.ico">
+<link rel="icon" href="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" sizes="60x60" type="image/png">  <link rel="stylesheet" href="./History Forecast Bulk - OpenWeatherMap_files/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><style class="darkreader darkreader--sync" media="screen"></style>
+
+<link rel="stylesheet" href="./History Forecast Bulk - OpenWeatherMap_files/css">
+<link rel="stylesheet" href="./History Forecast Bulk - OpenWeatherMap_files/css(1)">    <link href="./History Forecast Bulk - OpenWeatherMap_files/f715fd89ab078cb9d62b06cf2ebe66e0-1753893489" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+<!-- <link href="https://openweathermap.org/combine/9e05934b20b1168fe3f391e409e227a4-1753893489" rel="stylesheet"> -->
+<!-- <link href="/themes/openweathermap/assets/css/new_design.css" rel="stylesheet"> -->  <script src="./History Forecast Bulk - OpenWeatherMap_files/d8fb6d080cb70d894318fcae14526239-1753893489"></script><meta name="darkreader" content="a1c6f9962c044eb28631bba298d24af8"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: var(--darkreader-background-ffd76e, #684b00) !important;
+    border-color: var(--darkreader-background-c59d00, #9e7e00) !important;
+    color: var(--darkreader-text-302505, #d7d4cf) !important;
+}
+#vimvixen-console-frame {
+    color-scheme: light !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: var(--darkreader-background-add8e6, #1b4958) !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: var(--darkreader-background-cfecf5, #0f3a47) !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: var(--darkreader-background-f5f5f5, #1e2021) !important;
+}
+.tou-uknfeu {
+    background-color: var(--darkreader-background-faedda, #432c09) !important;
+}
+.tou-6i3zyv {
+    background-color: var(--darkreader-background-85c3d8, #245d70) !important;
+}
+div.mermaid-viewer-control-panel .btn {
+    background-color: var(--darkreader-neutral-background);
+    fill: var(--darkreader-neutral-text);
+}
+svg g rect.er {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.entityBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxOdd {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxEven {
+    fill: var(--darkreader-selection-background);
+    fill-opacity: 0.8 !important;
+}
+svg rect.er.relationshipLabelBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g g.nodes rect,
+svg g g.nodes polygon {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.task {
+    fill: var(--darkreader-selection-background) !important;
+}
+svg line.messageLine0,
+svg line.messageLine1 {
+    stroke: var(--darkreader-neutral-text) !important;
+}
+div.mermaid .actor {
+    fill: var(--darkreader-neutral-background) !important;
+}
+mitid-authenticators-code-app > .code-app-container {
+    background-color: white !important;
+    padding-top: 1rem;
+}
+iframe#unpaywall[src$="unpaywall.html"] {
+    color-scheme: light !important;
+}
+select {
+    --darkreader-bg--form-control-background-color: rgba(22, 22, 22, 0) !important;
+}
+select * {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+body#tumblr {
+    --darkreader-bg--secondary-accent: 31, 32, 34 !important;
+    --darkreader-bg--white: 23, 23, 23 !important;
+    --darkreader-text--black: 228, 224, 218 !important;
+}
+:host {
+    --d2l-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-button-icon-background-color-hover: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-color-ferrite: var(--darkreader-neutral-text) !important;
+    --d2l-color-sylvite: var(--darkreader-bg--d2l-color-sylvite) !important;
+    --d2l-dropdown-background-color: var(--darkreader-neutral-background) !important;
+    --d2l-dropdown-border-color: var(--darkreader-border--d2l-color-mica) !important;
+    --d2l-input-backgroud-color: var(--darkreader-neutral-background) !important;
+    --d2l-menu-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+    --d2l-tooltip-background-color: var(--darkreader-neutral-background) !important;
+    --d2l-tooltip-border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+:host([_floating]) .d2l-floating-buttons-container {
+    background-color: var(--darkreader-neutral-background) !important;
+    border-top-color: var(--darkreader-border--d2l-color-mica) !important;
+    opacity: 0.88 !important;
+}
+d2l-card {
+    background: var(--darkreader-neutral-background) !important;
+    border-color: var(--darkreader-border--d2l-color-gypsum) !important;
+}
+d2l-dropdown-content > div,
+d2l-menu-item {
+    background-color: var(--darkreader-neutral-background) !important;
+    border-radius: 10px !important;
+}
+d2l-empty-state-simple {
+    border-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-button-filter > ul > li > a.vui-button {
+    border-color: var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-label-text:has(.d2l-button-subtle-content):hover,
+.d2l-label-text:has(.d2l-button-subtle-content):focus,
+.d2l-label-text:has(.d2l-button-subtle-content):active {
+    background-color: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-navigation-centerer {
+    color: inherit !important;
+}
+.d2l-tabs-layout {
+    border-color: var(--darkreader-border--d2l-color-gypsum) !important;
+}
+.d2l-input,
+.d2l-calendar-date,
+.d2l-htmleditor-container {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.d2l-collapsible-panel {
+    border: 1px solid var(--darkreader-border--d2l-color-mica) !important;
+    border-radius: 0.4rem !important;
+}
+.d2l-collapsible-panel-divider {
+    border-bottom: 1px solid var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-w2d-flex {
+    border-bottom: 2px solid var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-collapsible-panel scrolled,
+.d2l-collapsible-panel-header,
+.d2l-w2d-collection-fixed {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.d2l-loading-spinner-bg {
+    fill: var(--darkreader-bg--d2l-color-gypsum) !important;
+}
+.d2l-loading-spinner-bg-stroke {
+    stroke: var(--darkreader-border--d2l-color-mica) !important;
+}
+.d2l-loading-spinner-wrapper svg path,
+.d2l-loading-spinner-wrapper svg circle {
+    fill: var(--darkreader-neutral-background) !important;
+}</style>
+<!-- <script src="https://openweathermap.org/combine/9dc69b9a99b742c8cd4a003c67dfede2-1753893489"></script> -->  <link rel="stylesheet" type="text/css" href="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/styles/inject.css"><style class="darkreader darkreader--sync" media="screen"></style><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/utils/constants.js"></script><div id="vsc-constants-loaded" style="display: none;">Constants loaded at 2025-07-31T08:17:24.279Z</div><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/utils/logger.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/utils/debug-helper.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/utils/dom-utils.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/utils/event-manager.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/core/storage-manager.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/core/settings.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/observers/media-observer.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/observers/mutation-observer.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/core/action-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/core/video-controller.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/ui/controls.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/ui/drag-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/ui/shadow-dom.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/site-handlers/base-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/site-handlers/netflix-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/site-handlers/youtube-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/site-handlers/facebook-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/site-handlers/amazon-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/site-handlers/apple-handler.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/site-handlers/index.js"></script><script src="chrome-extension://nffaoalbilbmmfgbnbgppjihopabppdk/src/content/inject.js"></script><div id="vsc-test-indicator" style="display: none;"></div></head>
+
+<body class="body-orange vsc-domain-openweathermap-org vsc-initialized" onclick="closePopUps()">
+  <link href="./History Forecast Bulk - OpenWeatherMap_files/smart_banner_android.css" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+
+<div id="banner_android" class="banner_stripe">
+    <div class="banner_container">
+        <a class="smartbanner__exit" onclick="bannerClose()"></a>
+        <img src="./History Forecast Bulk - OpenWeatherMap_files/android-app-top-banner.png" class="banner_icon" alt="banner android">
+        <div>
+            <p class="smartbanner-text">OpenWeather</p>
+            <p class="smartbanner-text">OpenWeather Ltd.</p>
+            <p class="smartbanner-text">GET - on Google Play</p>
+        </div>
+    </div>
+    <a class="google_button" href="https://play.google.com/store/apps/details?id=uk.co.openweather">VIEW</a>
+</div>
+
+<script src="./History Forecast Bulk - OpenWeatherMap_files/smart_banner_android.js"></script>  <nav id="nav-website" onclick="toggleMenu(event)">
+  <ul id="first-level-nav">
+    <li class="logo">
+      <a href="https://openweathermap.org/">
+        <img src="./History Forecast Bulk - OpenWeatherMap_files/logo_white_cropped.png" alt="logo">
+      </a>
+    </li>
+    <li id="hamburger">
+      <img src="./History Forecast Bulk - OpenWeatherMap_files/icon_hamburger.svg" alt="icon hamburger">
+    </li>
+    <li id="desktop-menu">
+      <form role="search" action="https://openweathermap.org/find" method="get">
+        <input type="text" name="q" placeholder="Weather in your city">
+        <input type="submit" class="submit">
+      </form>
+      <ul>
+        <li>
+          <a href="https://openweathermap.org/guide">Guide</a>
+        </li>
+        <li>
+          <a href="https://openweathermap.org/api">API</a>
+        </li>
+        <!-- <li>
+          <a href="https://dashboard.openweather.co.uk/" target="_blank">Dashboard</a>
+        </li> -->
+        <li class="with-dropdown">
+          <div id="dashboards-dropdown">Dashboards</div>
+          <ul class="dropdown-menu" id="dashboards-dropdown-menu" style="width: 230px !important; left: 20% !important;">
+            <li><a href="https://dashboard.openweather.co.uk/">Weather Dashboard</a></li>
+            <li><a href="https://openweather.co.uk/products/energy-dashboard">Energy Dashboard</a></li>
+            <li><a href="https://openweather.co.uk/products/extreme-weather-dashboard">Extreme Weather Dashboard</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="https://home.openweathermap.org/marketplace" target="_blank">Marketplace</a>
+        </li>
+        <li>
+          <a href="https://openweathermap.org/price">Pricing</a>
+        </li>
+        <li>
+          <a href="https://openweathermap.org/weathermap">Maps</a>
+        </li>
+        <li>
+          <a href="https://openweathermap.org/our-initiatives">Our Initiatives</a>
+        </li>
+        <!-- <li>
+          <a href="/examples">Partners</a>
+        </li> -->
+        <li>
+          <a href="https://openweather.co.uk/blog" target="_blank">Blog</a>
+        </li>
+        <li>
+          <a href="https://openweather.co.uk/" class="marketplace" target="_blank">For Business</a>
+        </li>
+                <li class="with-dropdown user-li">
+          <div id="user-dropdown">
+            <div class="inner-user-container">seresusly</div>
+          </div>
+          <ul class="dropdown-menu" id="user-dropdown-menu">
+            <li><a href="https://home.openweathermap.org/myservices">My services</a></li>
+            <li><a href="https://home.openweathermap.org/api_keys">My API keys</a></li>
+            <li><a href="https://home.openweathermap.org/payments">My payments</a></li>
+            <li><a href="https://home.openweathermap.org/home">My profile</a></li>
+            <li><a href="https://home.openweathermap.org/users/logout">Logout</a></li>
+          </ul>
+        </li>
+                <li><a href="https://openweathermap.org/support-centre">Support centre</a></li>
+    
+  </ul>
+  </li>
+  </ul>
+  <ul id="mobile-menu">
+    <li>
+      <form role="search" action="https://openweathermap.org/find" method="get">
+        <input type="text" name="q" placeholder="Weather in your city">
+        <input type="submit" class="submit">
+      </form>
+    </li>
+    <li>
+      <a href="https://openweathermap.org/guide">Guide</a>
+    </li>
+    <li>
+      <a href="https://openweathermap.org/api">API</a>
+    </li>
+    <li>
+      <a href="https://dashboard.openweather.co.uk/" target="_blank">Dashboard</a>
+    </li>
+    <li>
+      <a href="https://home.openweathermap.org/marketplace" target="_blank">Marketplace</a>
+    </li>
+    <li>
+      <a href="https://openweathermap.org/price">Pricing</a>
+    </li>
+    <li>
+      <a href="https://openweathermap.org/weathermap">Maps</a>
+    </li>
+    <li>
+      <a href="https://openweathermap.org/our-initiatives">Our Initiatives</a>
+    </li>
+    <li>
+      <a href="https://openweathermap.org/examples">Partners</a>
+    </li>
+    <li>
+      <a href="https://openweather.co.uk/blog" target="_blank">Blog</a>
+    </li>
+    <li>
+      <a href="https://openweather.co.uk/" class="marketplace" target="_blank">For Business</a>
+    </li>
+    <li><a href="https://openweathermap.org/support-centre">Support centre</a></li>
+        <li class="user"><a href="https://home.openweathermap.org/">seresusly</a></li>
+    <li><a href="https://home.openweathermap.org/users/logout">Logout</a></li>
+      </ul>
+</nav>
+<div class="nav-styles"></div>  <main class="wrapper">
+        <div class="topic">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7">
+                                    <h1 class="breadcrumb-title">History Forecast Bulk</h1>
+                            </div>
+            <div class="col-sm-5">
+                <ol class="breadcrumb pull-right hidden-xs">
+                    <li><a href="https://openweathermap.org/">Home</a></li>
+                                            <li class="active"><a href="https://openweathermap.org/api">API</a></li>
+                                                            
+                                                                        <li class="breadcrumb__leaf">History Forecast Bulk</li>
+                                                            </ol>
+            </div>
+        </div>
+    </div>   
+</div>        <div class="container documentation">
+   <div class="doc-container">
+      <div>
+         <nav>
+            <ul>
+               <li><a href="https://openweathermap.org/api/history-forecast-bulk#about">About History Forecast Bulk</a></li>
+               <li><a href="https://openweathermap.org/api/history-forecast-bulk#structure">Product structure</a></li>
+               <li><a href="https://openweathermap.org/api/history-forecast-bulk#buy">How to get History Forecast Bulk</a></li>
+               <li><a href="https://openweathermap.org/api/history-forecast-bulk#parameter">Fields in History Forecast Bulk</a>
+                  <ul>
+                     <li><a href="https://openweathermap.org/api/history-forecast-bulk#json">JSON format</a></li>
+                     <li><a href="https://openweathermap.org/api/history-forecast-bulk#csv">CSV format</a></li>
+                  </ul>
+               </li>
+               <li><a href="https://openweathermap.org/api/history-forecast-bulk#sample_and_response">Sample data and examples</a>
+                  <ul>
+                     <li><a href="https://openweathermap.org/api/history-forecast-bulk#json_example">JSON sample and example</a></li>
+                     <li><a href="https://openweathermap.org/api/history-forecast-bulk#csv_example">CSV sample and example</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </nav>
+      </div>
+      <div>
+         <p>
+            This service allows to extract historical forecast weather data from October 7, 2017 for any location on the
+            globe.</p>
+         <p>We provide historical 16-day forecasts with 1-hour step, please find detailed description in
+            the <a href="https://openweathermap.org/api/history-forecast-bulk#structure">"Product structure"</a> and <a href="https://openweathermap.org/api/history-forecast-bulk#parameter">"Fields in History Forecast
+               Bulk"</a> sections.
+
+         </p>
+         <section id="about">
+            <h2>About History Forecast Bulk</h2>
+            <p>History Forecast Bulk provides an archive of previous forecasts starting from October 7, 2017.</p>
+            <p>By using this service, you can receive data on previously made 16-day forecasts for any coordinates on
+               the globe.<br>
+            </p><p>There are two formats this can be provided in: CSV and JSON.</p>
+            <p>The examples of data can be found in the <a href="https://openweathermap.org/api/history-forecast-bulk#sample_and_response">"Sample data and examples"</a>
+               section.</p>
+            <p>Please <a href="mailto:info@openweathermap.org" onclick="ga(&#39;send&#39;,&#39;event&#39;,&#39;email&#39;,&#39;click&#39;,&#39;info&#39;);">contact us</a> when requesting data for a large
+               number of locations. We’ll prepare and export the data for you.</p>
+            <div class="text-center">
+               <a class="btn_like btn-orange" href="https://home.openweathermap.org/history_forecast_bulks/new" target="_blank">Buy History Forecast Bulk</a>
+            </div>
+
+         </section>
+         <section id="structure">
+            <h2>Product structure</h2>
+            <p>Historical forecast data is available from 7 October 2017.</p>
+            <p>A 16-day forecast is a set of values for weather parameters for each of the 16 days ahead. </p>
+            <p>There are 4 model recalculation cycles available for each day. Each time when recalculation happens, the
+               new forecast is generated (it updates values of weather parameters in the forecast).
+               It means that for each day, starting from 7 October 2017, you will have four 16-day forecasts.
+            </p>
+            <p>Forecasts are updated at these times: 00:00 UTC, 06:00 UTC, 12:00 UTC, 18:00 UTC. </p>
+            <p>To learn what weather data are included, please click <a href="https://openweathermap.org/api/history-forecast-bulk#parameter">here</a>.</p>
+            <p>A 16-day forecast is a set of values for weather parameters that are available in 1-hour steps for 16
+               days ahead.</p>
+            <p>Thus, each day will have the following structure:</p>
+            <div class="content">
+               <pre>                     <code class="plaintext hljs">
+   00:00 UTC  {forecast weather data for 1st day - 16th day}
+   06:00 UTC  {forecast weather data for 1st day - 16th day}
+   12:00 UTC  {forecast weather data for 1st day - 16th day}
+   18:00 UTC  {forecast weather data for 1st day - 16th day}
+                        </code>
+   </pre>
+            </div>
+
+            <p>Please be aware that older historical forecasts will have different time steps:</p>
+
+            <div class="info-board info-board-orange">
+               From 7 October 2017 to 15 June 2019, forecasted data in each recalculation cycle was available with the
+               following steps:
+               <p><b>{1st day - 10th day with 1-hour steps, 11th day - 16th day with 12-hour steps}</b></p>
+               <p>On 15th of June 2019 we have upgraded the service and forecast step became 1-hour for the whole period
+                  of the forecast:</p>
+               <p><b>{1st day - 16th day with 1-hour steps}</b></p>
+            </div>
+
+            <p>History Forecast Bulk are available in CSV and JSON.</p>
+         </section>
+         <section id="buy">
+            <h2>How to get History Forecast Bulk</h2>
+            <p>
+               To request History Forecast Bulk for your locations, please follow these steps:<br>
+            </p><ol>
+               <li>Go to the <a href="https://home.openweathermap.org/marketplace">OpenWeatherMap Marketplace</a> and
+                  choose <a href="https://home.openweathermap.org/history_forecast_bulks/new">"New History Forecast
+                     Bulk"</a> product.</li>
+               <li>Select locations. There are 4 ways to set your locations:
+                  <ul>
+                     <li><b>Click on the map.</b> Click on the map and the pin will be set on the chosen location. Click
+                        on
+                        the "Add location" to add this location into your order or click on another place on the map.
+                     </li>
+                     <li><b>Input location name.</b> Click on the search line, input location name and choose it from
+                        the
+                        dropdown list. The chosen location will be displayed on the map, click on the "Add location" tab
+                        to
+                        add this location into your order.</li>
+                     <li><b>Input coordinates.</b> Click on the search line, choose "By coordinate" option, enter
+                        latitude
+                        and longitude to the form and push the "Enter" button on your keyboard. The chosen location will
+                        be
+                        displayed on the map, click on the "Add location" tab to add this location into your order.</li>
+                     <li><b>Import coordinates via CSV file.</b> Click on the search line, choose "Import" option and
+                        follow the detail instruction on the form to download your CSV file with a list of
+                        coordinations.
+                     </li>
+                  </ul>
+               </li>
+               <li>Weather parameters, measurement units and the format of the downloadable output file can be also
+                  configurable per your preferences.</li>
+               <li>Click on the "Confirm order" button and check your oreder details.</li>
+               <li>To complete the checkout process, please click on the "Checkout" button and proceed to payment.</li>
+            </ol>
+            <div class="text-center">
+               <a class="btn_like btn-orange" href="https://home.openweathermap.org/history_forecast_bulks/new" target="_blank">Buy History Forecast Bulk</a>
+            </div>
+            <br>
+            <p>After the successful payment you will be able to find your order in two ways:</p>
+            <ol>
+               <li>You will also receive a letter to your email with the link to download your current order.</li>
+               <li>All purchases can be found in your personal account, in the <a href="https://home.openweathermap.org/history_bulks">"Order"</a> section.</li>
+            </ol>
+            <a href="./History Forecast Bulk - OpenWeatherMap_files/History_forecast_bulk.png" target="_blank">
+               <img class="responsive-img-doc" style="border: 1px solid rgb(165, 168, 166); --darkreader-inline-border-top: var(--darkreader-border-a5a8a6, #494f52); --darkreader-inline-border-right: var(--darkreader-border-a5a8a6, #494f52); --darkreader-inline-border-bottom: var(--darkreader-border-a5a8a6, #494f52); --darkreader-inline-border-left: var(--darkreader-border-a5a8a6, #494f52);" src="./History Forecast Bulk - OpenWeatherMap_files/History_forecast_bulk.png" alt="Extract example" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left="">
+            </a>
+         </section>
+         <section id="parameter">
+            <h2>Fields in History Forecast Bulk</h2>
+
+            <section id="json">
+               <h3>JSON format</h3>
+               <ul class="docs-list">
+                  <li><code>lat</code>Latitude of the location, decimal (−90; 90)</li>
+                  <li><code>lon</code>lon Longitude of the location, decimal (-180; 180)</li>
+                  <li><code>forecast</code>Forecast related information
+                     <ul>
+                        <li><code>forecast_dt</code>Forecast calculation time in unix timestamp</li>
+                        <li><code>list</code>
+                           <ul>
+                              <li><code>dt</code>Time for which the corresponding forecast part was calculated in unix
+                                 timestamp</li>
+                              <li><code>main</code>
+                                 <ul>
+                                    <li><code>temp</code>Temperature, Celsius</li>
+                                    <li><code>pressure</code>Atmospheric pressure (on the sea level), hPa</li>
+                                    <li><code>humidity</code>Humidity, %</li>
+                                    <li><code>dew_point</code>Temperature of the dew point, Celsius</li>
+                                    <li><code>grnd_pressure</code>Atmospheric pressure (on the surface), hPa</li>
+                                 </ul>
+                              </li>
+                              <li><code>wind</code>
+                                 <ul>
+                                    <li><code>speed</code>Wind speed, metre/sec</li>
+                                    <li><code>deg</code>Wind direction, degrees (meteorological)</li>
+                                 </ul>
+                              </li>
+                              <li><code>clouds</code>
+                                 <ul>
+                                    <li><code>all</code>Cloudiness, %</li>
+                                 </ul>
+                              </li>
+                              <li><code>precipitation</code>
+                                 <ul>
+                                    <li><code>hours</code>number of hours for which precipitation values are calculated
+                                    </li>
+                                    <li><code>rain</code>Rain, mm</li>
+                                    <li><code>snow</code>Snow water equivalent, mm</li>
+                                    <li><code>rate</code>Intensity, mm/s</li>
+                                    <li><code>convective</code>Convective precipitation, mm</li>
+                                    <li><code>ice</code>Ice pellets, mm</li>
+                                    <li><code>fr_rain</code>Freezing rain, mm</li>
+                                    <li><code>snow_depth</code>Depth of snow, m</li>
+                                    <li><code>probability</code>Probability of precipitation, %</li>
+                                    <li><code>accumulated</code>Accumulated volume of precipitation, mm</li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </section>
+            <section id="csv">
+               <h3>CSV format</h3>
+               <ul>
+                  <li><code>forecast dt unixtime</code> Forecast calculation time in unix timestamp</li>
+                  <li><code>forecast dt iso</code> Forecast calculation time in ISO format</li>
+                  <li><code>slice dt unixtime</code> Time for which the corresponding forecast part was calculated in
+                     unix
+                     timestamp </li>
+                  <li><code>slice dt iso</code> Time for which the corresponding forecast part was calculated in ISO
+                     format
+                  </li>
+                  <li><code>lat</code> Latitude of the location, decimal (−90; 90)</li>
+                  <li><code>lon</code> Longitude of the location, decimal (-180; 180) </li>
+                  <li><code>temperature</code> Temperature, Celsius </li>
+                  <li><code>dew_point</code> Temperature of the dew point, Celsius </li>
+                  <li><code>pressure</code> Atmospheric pressure (on the sea level), hPa</li>
+                  <li><code>ground_pressure</code> Atmospheric pressure (on the surface), hPa</li>
+                  <li><code>humidity</code> Humidity, %</li>
+                  <li><code>clouds</code> Cloudiness, % </li>
+                  <li><code>wind_speed</code> Wind speed, metre/sec</li>
+                  <li><code>wind_deg</code> Wind direction, degrees (meteorological)</li>
+                  <li><code>rain</code> Rain, mm</li>
+                  <li><code>snow</code> Snow water equivalent, mm</li>
+                  <li><code>ice</code> Ice pellets, mm</li>
+                  <li><code>fr_rain</code> Freezing rain volume, mm</li>
+                  <li><code>convective</code> Convective precipitation, mm</li>
+                  <li><code>snow_depth</code> Depth of snow, m</li>
+                  <li><code>accumulated</code> Accumulated volume of precipitation, mm</li>
+                  <li><code>hours</code> Number of hours for which precipitation values are calculated</li>
+                  <li><code>rate</code> Precipitation intensity, mm/s</li>
+                  <li><code>probability</code> Probability of precipitation, %</li>
+               </ul>
+            </section>
+         </section>
+
+         <section id="sample_and_response">
+            <h2>Sample data and examples</h2>
+            <p>Here you can find and download examples of History Forecast bulk files in <a href="https://openweathermap.org/api/history-forecast-bulk#json_example">JSON</a> and <a href="https://openweathermap.org/api/history-forecast-bulk#csv_example">CSV</a> formats.</p>
+            <section id="json_example">
+               <h3>JSON sample data and example</h3>
+               <p>In this section you can find and download example of History Forecast bulk files in JSON format.</p>
+               <p>You can download sample of files History Forecast bulk in JSON format using link below:</p>
+               <a href="https://openweathermap.org/themes/openweathermap/assets/docs/London_51_507218_-0_127586_fc-sample-200524.json" download="">JSON</a>
+               <p>Please find below an example of data in JSON format for one measurement.</p>
+               <div class="response open">
+                  <div class="api">
+                     History Forecast Bulk example
+                  </div>
+
+                  <div class="content">
+                     <pre>                     <code class="json hljs">
+[
+  {
+    <span class="hljs-attr">"lat"</span>: <span class="hljs-number">51.507218</span>,
+    <span class="hljs-attr">"lon"</span>: <span class="hljs-number">-0.127586</span>,
+    <span class="hljs-attr">"forecast"</span>: [
+      {
+        <span class="hljs-attr">"forecast_dt"</span>: <span class="hljs-number">1714521600</span>,
+        <span class="hljs-attr">"list"</span>: [
+          {
+            <span class="hljs-attr">"dt"</span>: <span class="hljs-number">1714521600</span>,
+            <span class="hljs-attr">"main"</span>: {
+              <span class="hljs-attr">"temp"</span>: <span class="hljs-number">10.36</span>,
+              <span class="hljs-attr">"pressure"</span>: <span class="hljs-number">1008.68</span>,
+              <span class="hljs-attr">"humidity"</span>: <span class="hljs-number">94.9</span>,
+              <span class="hljs-attr">"dew_point"</span>: <span class="hljs-number">9.58</span>,
+              <span class="hljs-attr">"grnd_pressure"</span>: <span class="hljs-number">1004.68</span>
+            },
+            <span class="hljs-attr">"wind"</span>: {
+              <span class="hljs-attr">"speed"</span>: <span class="hljs-number">1.86</span>,
+              <span class="hljs-attr">"deg"</span>: <span class="hljs-number">113.44</span>
+            },
+            <span class="hljs-attr">"clouds"</span>: {
+              <span class="hljs-attr">"all"</span>: <span class="hljs-number">100</span>
+            },
+            <span class="hljs-attr">"precipitation"</span>: {
+              <span class="hljs-attr">"hours"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"rain"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"snow"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"rate"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"convective"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"ice"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"fr_rain"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"snow_depth"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"probability"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"accumulated"</span>: <span class="hljs-string">"0.0"</span>
+            }
+          },
+          {
+            <span class="hljs-attr">"dt"</span>: <span class="hljs-number">1714525200</span>,
+            <span class="hljs-attr">"main"</span>: {
+              <span class="hljs-attr">"temp"</span>: <span class="hljs-number">10.55</span>,
+              <span class="hljs-attr">"pressure"</span>: <span class="hljs-number">1008.55</span>,
+              <span class="hljs-attr">"humidity"</span>: <span class="hljs-number">93.25</span>,
+              <span class="hljs-attr">"dew_point"</span>: <span class="hljs-number">9.38</span>,
+              <span class="hljs-attr">"grnd_pressure"</span>: <span class="hljs-number">1004.55</span>
+            },
+            <span class="hljs-attr">"wind"</span>: {
+              <span class="hljs-attr">"speed"</span>: <span class="hljs-number">1.05</span>,
+              <span class="hljs-attr">"deg"</span>: <span class="hljs-number">114.04</span>
+            },
+            <span class="hljs-attr">"clouds"</span>: {
+              <span class="hljs-attr">"all"</span>: <span class="hljs-number">89</span>
+            },
+            <span class="hljs-attr">"precipitation"</span>: {
+              <span class="hljs-attr">"hours"</span>: <span class="hljs-number">1</span>,
+              <span class="hljs-attr">"rain"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"snow"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"rate"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"convective"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"ice"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"fr_rain"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"snow_depth"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"probability"</span>: <span class="hljs-string">"0.0"</span>,
+              <span class="hljs-attr">"accumulated"</span>: <span class="hljs-string">"0.0"</span>
+            },
+           ...
+          }
+        ]
+      }
+    ]
+  }
+]
+                  </code>
+   </pre>
+                  </div>
+               </div>
+            </section>
+            <section id="csv_example">
+               <h3>CSV sample data and example</h3>
+               <p>In this section you can find and download example of History Forecast bulk files in CSV format.</p>
+               <p>You can download sample of files History Forecast bulk in CSV format using link below:</p>
+               <a href="https://openweathermap.org/themes/openweathermap/assets/docs/London_51_507218_-0_127586_fc-sample-200524.csv" download="">CSV</a>
+               <p>Please find below an example of data in CSV format in tabular format.</p>
+               <a href="./History Forecast Bulk - OpenWeatherMap_files/Table_view_History_bulk_CSV.png" target="_blank">
+                  <img src="./History Forecast Bulk - OpenWeatherMap_files/Table_view_History_bulk_CSV.png" alt="Extract example" class="responsive-img-doc">
+               </a>
+            </section>
+         </section>
+      </div>
+   </div>
+</div>  </main>
+  <div id="footer-website" onclick="toggleFooterSection(event)">
+   <div class="inner-footer-container">
+      <div class="horizontal-section">
+         <div class="footer-section">
+            <p class="section-heading">Product Collections</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="https://openweathermap.org/api#current">Current and Forecast APIs</a></li>
+                  <li><a href="https://openweathermap.org/api#history">Historical Weather Data</a></li>
+                  <li><a href="https://openweathermap.org/api#maps">Weather Maps</a></li>
+                  <li><a href="https://dashboard.openweather.co.uk/" target="_blank">Weather Dashboard</a></li>
+                  <li><a href="https://openweathermap.org/widgets-constructor">Widgets</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section">
+            <p class="section-heading">Subscription</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="https://openweathermap.org/appid">How to start</a></li>
+                  <li><a href="https://openweathermap.org/price">Pricing</a></li>
+                  <li><a href="https://home.openweathermap.org/users/sign_up">Subscribe for free</a></li>
+                  <li><a href="https://openweathermap.org/faq">FAQ</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section">
+            <p class="section-heading">Company</p>
+            <div class="section-content">
+               <p>OpenWeather is a team of IT experts and data scientists that has been practising deep weather data
+                  science. For each point on the globe, OpenWeather provides historical, current and forecasted weather
+                  data via light-speed APIs. Headquarters in London, UK.</p>
+            </div>
+         </div>
+      </div>
+      <div class="horizontal-section">
+         <div class="footer-section">
+            <p class="section-heading">Technologies</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="https://openweathermap.org/technology">Our technology</a></li>
+                  <li><a href="https://openweathermap.org/accuracy-and-quality">Accuracy and quality of weather data</a></li>
+                  <li><a href="https://openweathermap.org/stations">Connect your weather station</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section">
+            <p class="section-heading">Terms &amp; Conditions</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="https://openweathermap.org/themes/openweathermap/assets/docs/OpenWeather_T&amp;C_of_sale.pdf" target="_blank">Terms and conditions of sale</a></li>
+                  <li><a href="https://openweather.co.uk/privacy-policy" target="_blank">Privacy Policy</a></li>
+                  <li><a href="https://openweathermap.org/themes/openweathermap/assets/docs/Openweather_website_terms_and_conditions_of_use.pdf" target="_blank">Website terms and conditions</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section not-foldable">
+            <!-- <p class="section-heading">Contact us</p> -->
+            <div class="section-content">
+               <ul>
+                  <li><a href="https://openweathermap.org/about-us" target="_blank">About us</a></li>
+                  <li><a href="https://openweather.co.uk/about/our-offices" target="_blank">Our offices</a></li>
+                  <li><a href="https://openweather.co.uk/blog" target="_blank">Blog</a></li>
+                  <li><a href="https://openweather.co.uk/" target="_blank">OpenWeather for Business</a></li>
+                  <li><a href="https://openweathermap.org/chat">Ulla, OpenWeather AI assistant</a></li>
+                  <li><a href="https://home.openweathermap.org/questions" target="_blank">Ask a question</a></li>
+                  <!--  <li><a href="mailto:info@openweathermap.org">info@openweathermap.org</a>  -->
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="horizontal-section">
+         <div class="footer-section">
+            <div class="my-5">
+               <p>Download OpenWeather app</p>
+               <div>
+                  <a href="https://apps.apple.com/gb/app/openweather/id1535923697" target="_blank">
+                     <img src="./History Forecast Bulk - OpenWeatherMap_files/app-store-badge.svg" alt="Get it on AppStore">
+                  </a>
+                  <a href="https://play.google.com/store/apps/details?id=uk.co.openweather" target="_blank">
+                     <img src="./History Forecast Bulk - OpenWeatherMap_files/google-play-badge.png" class="google-play-img" alt="Get it on Google Play">
+                  </a>
+               </div>
+            </div>
+         </div>
+         <div class="footer-section">
+            <div class="my-5 logo-blocks">
+               <img src="./History Forecast Bulk - OpenWeatherMap_files/RMets_Logo_corp.png" width="200" height="70" alt="RMets logo">
+               <img src="./History Forecast Bulk - OpenWeatherMap_files/CNB_Business_Logo_2024.png" alt="CNB Business logo" width="170" height="170">
+            </div>
+         </div>
+
+      </div>
+      <div class="horizontal-section my-5">
+         <div>
+            <span>Supplier of Achilles UVDB community</span><br>
+            <span id="years-copyright">© 2012 — 2025 OpenWeather ® All rights reserved</span><br><br>
+         </div>
+         <div class="social">
+            <a href="https://www.facebook.com/groups/270748973021342" target="_blank"><img src="./History Forecast Bulk - OpenWeatherMap_files/icon_facebook.png" alt="facebook icon"></a>
+            <a href="https://twitter.com/OpenWeatherMap" target="_blank"><img src="./History Forecast Bulk - OpenWeatherMap_files/icon_x_black.png" alt="x icon"></a>
+            <a href="https://www.linkedin.com/company/9816754" target="_blank"><img src="./History Forecast Bulk - OpenWeatherMap_files/icon_linkedin.png" alt="linkedin icon "></a>
+            <a href="https://medium.com/@openweathermap" target="_blank"><img src="./History Forecast Bulk - OpenWeatherMap_files/new_medium.svg" alt="meduim icon"></a>
+            <a href="https://t.me/openweathermap" target="_blank"><img src="./History Forecast Bulk - OpenWeatherMap_files/icon_telegram.png" alt="telegram icon"></a>
+            <a href="https://github.com/openweathermap" target="_blank"><img src="./History Forecast Bulk - OpenWeatherMap_files/icon_github.png" alt="github icon"></a>
+         </div>
+      </div>
+      <div class="horizontal-section"></div>
+   </div>
+</div>  <script src="./History Forecast Bulk - OpenWeatherMap_files/raven.min.js"></script>
+<script>Raven.config('http://66df88eb63e94f27964b84031e49b358@sentry.owm.io/16').install()</script>  <script src="./History Forecast Bulk - OpenWeatherMap_files/bundle_owm_postload.c31872127471c475ade1.js"></script>
+<script src="./History Forecast Bulk - OpenWeatherMap_files/advertising.js"></script>    <link href="./History Forecast Bulk - OpenWeatherMap_files/chat-banner.css" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+<link href="./History Forecast Bulk - OpenWeatherMap_files/assistant-index.DVVhxENO.css" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+
+<style>
+  #owm-chat-bot p {
+    font-weight: normal;
+  }
+
+  #owm-chat-bot>div {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .pop-up-content h2 {
+    margin-top: 19.2px;
+  }
+
+  .owm-chat-bot-description ul {
+    margin: 0;
+    padding: 16px;
+    background-color: #4f4f4f;
+    color: white;
+    border-radius: 4.8px;
+  }
+
+  .owm-chat-bot-description ul.dashed {
+    list-style-type: none;
+  }
+
+  /* .owm-chat-bot-description ul.dashed>li {
+    text-indent: -1rem;
+  } */
+
+  .owm-chat-bot-description ul.dashed>li:before {
+    content: "- ";
+    text-indent: -16px;
+  }
+</style><style class="darkreader darkreader--sync" media="screen"></style>
+
+<div id="owm-chat-bot" data-key="5796abbde9106b7da4febfae8c44c232" data-popup="" style="display: none; position: fixed; z-index: 50000; bottom: 16px; right: 16px; height: 640px; max-height: calc(100% - 32px); width: 480px; max-width: calc(100% - 32px);"><div class="flex h-full grow flex-col rounded-xl border bg-white shadow-lg"><div class="flex items-center justify-between rounded-t-xl border-t bg-pearl-800 p-4 font-title"><div class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.4 36.9" class="h-10 w-10 text-primary-400"><path d="M45.1 22.9a1.5 1.5 0 01-1.5 1.5H27.9a1.5 1.5 0 00-1.4 1.6 1.5 1.5 0 001.4 1.5h.7a1.5 1.5 0 011.5 1.5 1.5 1.5 0 01-1.5 1.5h-1.9a1.5 1.5 0 00-1.5 1.5 1.5 1.5 0 001.5 1.5h10.2a1.5 1.5 0 011.5 1.5 1.5 1.5 0 01-1.5 1.5h-27A1.5 1.5 0 018.4 35a1.5 1.5 0 011.5-1.5h6.5a1.5 1.5 0 001.5-1.5 1.5 1.5 0 00-1.5-1.5H6.8A1.5 1.5 0 015.3 29a1.3 1.3 0 01.1-.6 1.6 1.6 0 011.4-.9h.5A1.5 1.5 0 008.8 26a1.5 1.5 0 00-1.5-1.5H1.5A1.5 1.5 0 010 23a1.5 1.5 0 011.5-1.5h1.1a26.4 26.4 0 01-.2-2.9 18.5 18.5 0 1136.9 0 26.4 26.4 0 01-.2 2.9h4.5a1.5 1.5 0 011.5 1.4z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;"></path><path d="M47.4 29.1a1.5 1.5 0 01-1.5 1.5h-3.3a1.5 1.5 0 01-1.5-1.5 1.5 1.5 0 011.5-1.5h3.3a1.5 1.5 0 011.5 1.5z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;"></path><path d="M38.6 29.1a1.5 1.5 0 01-1.5 1.5h-3.4a1.5 1.5 0 01-1.4-1.5 1.5 1.5 0 011.4-1.5h3.4a1.5 1.5 0 011.5 1.5z" fill="currentColor" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;"></path></svg><div class="text-md font-title font-bold text-pearl-100">Ask Ulla Weather Assistant</div></div><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer text-pearl-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-darkreader-inline-stroke="" style="--darkreader-inline-stroke: currentColor;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg></div><div class="messages flex-1 overflow-auto"><div class="flex flex-col gap-y-2 p-3"><div class="flex gap-3 justify-start"><div class="bubble answer"><div><p>Hello! I’m Ulla, the OpenWeather AI Assistant. Feel free to ask me about the weather anywhere in the world, get weather-related recommendations and receive help navigating  OpenWeather’s products.</p>
+</div></div></div></div></div><form class="flex items-center justify-between border-t p-3"><div class="relative flex-1"><input type="text" class="w-full rounded border py-2 pl-4 pr-10 shadow focus:outline-none" placeholder="Type your message here..." value=""><button type="submit" disabled="" class="absolute inset-y-0 right-0 flex items-center justify-center px-3 text-primary-400 focus:outline-none "><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="size-6" data-darkreader-inline-fill="" style="--darkreader-inline-fill: currentColor;"><path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"></path></svg></button></div></form></div></div>
+
+<script>
+  `ASSISTANT_URL=https://api.openweathermap.org`.split("\n").map(env => env.split('=')).map(env => window[env[0]] = env[1]);
+</script>
+<script src="./History Forecast Bulk - OpenWeatherMap_files/assistant-index.C8m1FIny.js"></script>
+
+<div id="chat-banner" class="banner-pop-up">
+  <div class="banner-pop-up-content">
+    <img src="./History Forecast Bulk - OpenWeatherMap_files/Ulla_bot.png" alt="Ulla the Bot" width="16" height="16">
+    <h3>Ulla Weather Assistant</h3>
+  </div>
+</div>
+
+
+<script>
+  const chatBanner = document.getElementById('chat-banner');
+  const chatBot = document.getElementById('owm-chat-bot');
+
+  chatBanner.addEventListener('click', () => {
+    chatBanner.style.display = 'none';
+    chatBot.style.display = chatBot.style.display === 'none' ? 'block' : 'none';
+    gtag('event', 'maxullaweather', {
+      'event_category': 'Chat',
+      'event_label': 'maxullaweather'
+    });
+  });
+
+  window.addEventListener('minimize', () => {
+    chatBot.style.display = 'none';
+    chatBanner.style.display = 'block';
+    gtag('event', 'minullaweather', {
+      'event_category': 'Chat',
+      'event_label': 'minullaweather'
+    });
+  });
+
+  const gdprBanner = document.querySelector('.gdpr-banner');
+
+  if (gdprBanner) {
+    chatBanner.style.bottom = '80px';
+
+    const observer = new MutationObserver(() => {
+      if (!document.body.contains(gdprBanner)) {
+        chatBanner.style.bottom = '50px';
+      } else {
+        chatBanner.style.bottom = (gdprBanner.clientHeight + 8) + 'px';
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+</script>
+
+<div id="topcontrol" title="" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;"><i class="fa fa-angle-up backtotop"></i></div></body></html>
